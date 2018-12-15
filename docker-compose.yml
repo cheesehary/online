@@ -1,0 +1,39 @@
+version: "3"
+services:
+  web:
+    build: .
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - "8888:8888"
+    environment:
+      - ENV=development
+    depends_on:
+      - db
+      - redis
+    networks:
+      - online
+  db:
+    image: mysql:5.6.42
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootroot
+      - MYSQL_USER=ryan
+      - MYSQL_PASSWORD=ryanryan
+      - MYSQL_DATABASE=cuisine
+    networks:
+      - online
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - online
+networks:
+  online:
+volumes:
+  db-data:

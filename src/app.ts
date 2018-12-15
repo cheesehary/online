@@ -19,10 +19,29 @@ import './util/passport';
 
 const redisStore = connectRedis(session);
 const redisClient = createClient({ port: REDIS_PORT, host: REDIS_HOST });
+redisClient.on('connect', () => logger.info('redis connected'));
 
-createConnection()
-  .then(() => logger.info('mysql connection created'))
-  .catch(err => logger.error(err));
+const dbConnectionLoop = (seconds: number) => {
+  const startTime = new Date().getTime();
+  const connect = () => {
+    createConnection()
+      .then(async connection => {
+        await connection.query(`CREATE DATABASE IF NOT EXISTS cuisine`);
+        await connection.query(`USE cuisine`);
+        logger.info('mysql connected');
+      })
+      .catch(err => {
+        const curTime = new Date().getTime();
+        if (curTime - startTime > seconds * 1000) {
+          logger.error(err);
+        } else {
+          connect();
+        }
+      });
+  };
+  connect();
+};
+dbConnectionLoop(30);
 
 const app = express();
 

@@ -2,20 +2,19 @@
   "name": "cuisine",
   "version": "1.0.0",
   "description": "",
-  "watch": {
-    "tslint": "src/**/*"
-  },
   "scripts": {
+    "start": "npm run prod",
+    "prod": "npm run client-prod && npm run server-build && npm run server-prod",
     "build": "npm run client-build && npm run server-build",
-    "debug": "npm run client-build && npm run server-debug",
-    "client-build": "webpack",
-    "client-watch": "webpack -w",
-    "server-debug": "npm run server-build && npm run server-serve",
+    "debug": "npm run client-build && npm run server-build && npm run server-debug",
+    "client-build": "webpack --config webpack.dev.js",
+    "client-prod": "webpack --config webpack.prod.js",
+    "client-watch": "webpack -w --config webpack.dev.js",
+    "server-prod": "cross-env NODE_ENV=production node dist/server.js | node_modules/.bin/bunyan",
     "server-build": "tsc && npm run tslint",
-    "server-serve": "node --inspect dist/server.js | node_modules/.bin/bunyan",
-    "server-serve-watch": "nodemon --inspect dist/server.js | node_modules/.bin/bunyan",
+    "server-debug": "node --inspect dist/server.js | node_modules/.bin/bunyan",
+    "server-watch": "nodemon --inspect dist/server.js | node_modules/.bin/bunyan",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "watch": "npm-watch",
     "test": "echo \"test passed\" && exit 0"
   },
   "repository": {
@@ -70,13 +69,13 @@
     "awesome-typescript-loader": "^5.2.1",
     "clean-webpack-plugin": "^1.0.0",
     "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^1.0.1",
     "debug": "^4.1.0",
     "file-loader": "^2.0.0",
     "morgan": "^1.9.1",
     "node-sass": "^4.10.0",
     "nodemon": "^1.18.6",
-    "npm-watch": "^0.4.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "sass-loader": "^7.1.0",
@@ -84,12 +83,14 @@
     "style-loader": "^0.23.1",
     "supports-color": "^5.5.0",
     "ts-node": "^7.0.1",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
     "tslint": "^5.11.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.1.6",
     "url-loader": "^1.1.2",
     "webpack": "^4.26.0",
     "webpack-cli": "^3.1.2",
-    "webpack-manifest-plugin": "^2.0.4"
+    "webpack-manifest-plugin": "^2.0.4",
+    "webpack-merge": "^4.1.5"
   }
 }

@@ -3,4 +3,3 @@ dist
 tmp
 .vscode
 dump.rdb
-.env

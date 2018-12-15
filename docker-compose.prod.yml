@@ -1,0 +1,13 @@
+version: "3"
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - ENV=production
+    depends_on:
+      - db
+      - redis
+    networks:
+      - online

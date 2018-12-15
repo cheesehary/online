@@ -1,9 +1,9 @@
 const path = require('path');
 const cleanPlugin = require('clean-webpack-plugin');
 const manifestPlugin = require('webpack-manifest-plugin');
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
   entry: {
     home: path.join(__dirname, 'src/public/home/index.ts'),
     app: path.join(__dirname, 'src/public/app/index.tsx')
@@ -13,13 +13,9 @@ module.exports = {
     path: path.join(__dirname, 'dist/public'),
     publicPath: '/static/'
   },
-  devtool: 'source-map',
   resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
-    alias: {
-      '@Constants': path.join(__dirname, 'src/util/constants.ts'),
-      '@Models': path.join(__dirname, 'src/models/')
-    }
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    plugins: [new TsconfigPathsPlugin()]
   },
   plugins: [new cleanPlugin(['dist']), new manifestPlugin()],
   module: {
