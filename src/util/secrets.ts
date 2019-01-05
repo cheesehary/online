@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import fs from 'fs';
 import logger from './logger';
 
 if (process.env.NODE_ENV === 'production') {

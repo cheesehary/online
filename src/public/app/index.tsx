@@ -1,8 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { StoreProvider } from './store';
 
-const App = () => {
-  return <div>Hello, Cuisine!</div>;
+const Root = () => {
+  return (
+    <StoreProvider>
+      <div>Cuisine</div>
+    </StoreProvider>
+  );
 };
 
-render(<App />, document.getElementById('app'));
+render(<Root />, document.getElementById('app'));
