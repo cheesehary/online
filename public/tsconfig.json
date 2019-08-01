@@ -9,15 +9,11 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "lib": ["es6", "dom"],
-    "outDir": "build",
     "baseUrl": ".",
     "paths": {
-      "*": ["node_modules/*", "src/types/*"],
-      "@Constants": ["src/util/constants.ts"],
-      "@Models": ["src/models/index.ts"]
+      "*": ["../node_modules/*", "./types/*"]
     },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
-  },
-  "include": ["src/**/*"]
+  }
 }

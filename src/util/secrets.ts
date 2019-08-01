@@ -1,12 +1,15 @@
-import dotenv from 'dotenv';
-import logger from './logger';
+import dotenv from "dotenv";
+import logger from "./logger";
 
-if (process.env.NODE_ENV === 'production') {
-  logger.info('using .env file for environment variables');
-  dotenv.config({ path: '.env' });
+if (process.env.NODE_ENV === "production") {
+  logger.info("using .env file for environment variables");
+  dotenv.config({ path: ".env" });
+} else if (process.env.NODE_ENV === "docker") {
+  logger.info("using .env.docker file for environment variables");
+  dotenv.config({ path: ".docker.env" });
 } else {
-  logger.info('using .env.example file for environment variables');
-  dotenv.config({ path: '.env.example' });
+  logger.info("using .env.dev file for environment variables");
+  dotenv.config({ path: ".dev.env" });
 }
 
 export const PORT = process.env.PORT;

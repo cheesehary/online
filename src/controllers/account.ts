@@ -1,24 +1,24 @@
-import { Request, Response, NextFunction } from 'express';
-import { getRepository } from 'typeorm';
-import bcrypt from 'bcrypt';
-import passport from 'passport';
-import { body } from 'express-validator/check';
-import { formattedValidationResult } from '../util/helpers';
+import { Request, Response, NextFunction } from "express";
+import { getRepository } from "typeorm";
+import bcrypt from "bcrypt";
+import passport from "passport";
+import { body } from "express-validator/check";
+import { formattedValidationResult } from "../util/helpers";
 // import User from '@Models/User';
-import { User } from '../models';
-import { BASE_PATH } from '../util/constants';
-import { ERR_CODE } from '../util/enums';
+import { User } from "../models";
+import { BASE_PATH } from "setting/constants";
+import { ERR_CODE } from "setting/enums";
 
 export const validate = (method: string) => {
   switch (method) {
-    case 'login':
+    case "login":
       return [
-        body('account')
+        body("account")
           .isEmail()
-          .withMessage('must be a valid email address'),
-        body('password')
+          .withMessage("must be a valid email address"),
+        body("password")
           .isLength({ min: 8, max: 16 })
-          .withMessage('must be between 8 and 16 characters')
+          .withMessage("must be between 8 and 16 characters")
       ];
   }
 };
@@ -41,7 +41,7 @@ export const login = async (
   } else {
     const hash = await bcrypt.hash(password, 10);
     const name =
-      'Chef_' +
+      "Chef_" +
       Math.random()
         .toString()
         .substring(2, 6);
@@ -52,8 +52,8 @@ export const login = async (
     });
     user = await UserRepo.save(newUser);
   }
-  passport.authenticate('local', (err, user) => {
-    if (err || !user) return next(err || new Error('user not found'));
+  passport.authenticate("local", (err, user) => {
+    if (err || !user) return next(err || new Error("user not found"));
     req.logIn(user, err => {
       if (err) return next(err);
       const returnTo = req.session.returnTo || BASE_PATH;

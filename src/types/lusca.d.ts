@@ -6,4 +6,4 @@ interface csrf {
   csrfToken(): string;
 }
 
-declare module 'lusca';
+declare module "lusca";

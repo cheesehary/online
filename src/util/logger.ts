@@ -1,18 +1,17 @@
-import bunyan from 'bunyan';
-import path from 'path';
+import bunyan from "bunyan";
 
 const logger = bunyan.createLogger({
-  name: 'app',
+  name: "app",
   src: true,
   streams: [
     {
-      level: 'error',
-      path: 'tmp/server-error.log',
+      level: "error",
+      path: "tmp/server-error.log",
       stream: process.stdout
     }
   ]
 });
 
-logger.level(process.env.NODE_ENV === 'production' ? 'info' : 'debug');
+logger.level(process.env.NODE_ENV === "production" ? "info" : "debug");
 
 export default logger;
