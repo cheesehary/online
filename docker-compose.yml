@@ -21,10 +21,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      # - MYSQL_ROOT_PASSWORD=rootroot
+      - MYSQL_ROOT_PASSWORD=ryanryan
       - MYSQL_USER=root
       # - MYSQL_PASSWORD=ryanryan
-      # - MYSQL_DATABASE=cuisine
+      - MYSQL_DATABASE=cuisine
     networks:
       - online
   redis:

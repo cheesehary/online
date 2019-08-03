@@ -23,12 +23,13 @@ function toggleMute() {
 }
 
 function toggleLogin() {
-  const form = $(".sign-up");
-  if (form.is(":visible")) {
-    form.hide();
-  } else {
-    form.show();
-  }
+  // const form = $(".sign-up");
+  // if (form.is(":visible")) {
+  //   form.hide();
+  // } else {
+  //   form.show();
+  // }
+  alert("under maintenance");
 }
 
 function login() {
