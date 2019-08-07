@@ -13,6 +13,7 @@ import lusca from "lusca";
 import favicon from "serve-favicon";
 import logger from "./util/logger";
 import { PORT, SESSION_SECRET, REDIS_PORT, REDIS_HOST } from "./util/secrets";
+console.log(PORT);
 import { createConnection } from "typeorm";
 import { ROOT, STATIC_PATH } from "setting/constants";
 import router from "./routes";
@@ -46,7 +47,7 @@ dbConnectionLoop(30);
 
 const app = express();
 
-app.set("port", PORT || 8888);
+app.set("port", PORT);
 app.set("views", path.resolve(__dirname, "../views"));
 app.set("view engine", "pug");
 
