@@ -5,3 +5,4 @@ tmp
 .vscode
 dump.rdb
 setting/*.js
+package-lock.json
