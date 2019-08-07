@@ -1,7 +1,8 @@
 #!/bin/sh
 if [ "$TRAVIS_PULL_REQUEST" = "false" ]
 then
-  pip install --upgrade pip
+  sudo pip install --upgrade pip
+  pip --version
   pip install awscli --upgrade --user;
   awscli --version;
   export PATH="$PATH:$HOME/.local/bin";
