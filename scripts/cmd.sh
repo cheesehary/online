@@ -1,6 +1,6 @@
-if [ "$ENV" = "production" ]
+if [ "$ENV" = "development" ]
 then
-  npm start
-else
   npm run docker
+else
+  npm start
 fi

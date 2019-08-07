@@ -10,6 +10,7 @@ import { createClient } from "redis";
 import connectRedis from "connect-redis";
 import passport from "passport";
 import lusca from "lusca";
+import favicon from "serve-favicon";
 import logger from "./util/logger";
 import { PORT, SESSION_SECRET, REDIS_PORT, REDIS_HOST } from "./util/secrets";
 import { createConnection } from "typeorm";
@@ -50,14 +51,15 @@ app.set("views", path.resolve(__dirname, "../views"));
 app.set("view engine", "pug");
 
 app.use(compression());
-app.use(morgan("dev"));
+app.use(favicon(path.resolve(__dirname, "../public/favicon.ico")));
+app.use(morgan(process.env.NODE_ENV === "production" ? "short" : "dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   session({
     name: "cuisine.sid",
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     secret: SESSION_SECRET,
     store: new redisStore({ client: redisClient })
   })
