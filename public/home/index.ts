@@ -55,7 +55,7 @@ function toggleLogin($form: JQuery<HTMLElement>) {
 }
 
 function login() {
-  return alert("under maintenance...");
+  return alert("sorry, under maintenance...");
   const _csrf = $('meta[name="csrf"]').attr("content");
   const account = $('input[type="email"]').val();
   const password = $('input[type="password"]').val();

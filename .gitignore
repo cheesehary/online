@@ -7,3 +7,4 @@ dump.rdb
 .env
 setting/*.js
 .DS_Store
+taskDefinition.json
